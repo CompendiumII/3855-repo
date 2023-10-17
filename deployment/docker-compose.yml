@@ -1,5 +1,41 @@
 version: '3.3'
 services:
+
+  audit_log:
+    image: audit_log:latest
+    restart: always
+    ports:
+      - "8110:8110"
+    depends_on:
+      - "kafka"
+
+  receiver:
+    image: receiver:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "kafka"
+
+  storage:
+    image: storage:latest
+    restart: always
+    ports:
+      - "8090:8090"
+    depends_on:
+      - "kafka"
+      - "db"
+
+  processing:
+    image: processing:latest
+    restart: always
+    ports:
+      - "8100:8100"
+    depends_on:
+      - "storage"
+    network_mode: "host"
+
+
   zookeeper:
     image: wurstmeister/zookeeper
     restart: always
