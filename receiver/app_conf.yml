@@ -1,0 +1,10 @@
+version: 1
+ability:
+  url: http://localhost:8090/Usage_Count/ability-usage
+item:
+  url: http://localhost:8090/Usage_Count/item-usage
+
+events:
+  hostname: kevin-3855.eastus.cloudapp.azure.com
+  port: 9092
+  topic: events

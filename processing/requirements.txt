@@ -1,0 +1,4 @@
+connexion==2.14.2
+apscheduler==3.10.4
+requests==2.31.0
+swagger-ui-bundle==0.0.9

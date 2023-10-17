@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: DOTA2 Usage Tracker
+  description: This API receives usage events from DOTA2.
+paths:
+  /Usage_Count/stats:
+    get:
+      operationId: processing.get_stats
+      description: Gets item and ability usage stats processed by statistics
+      responses:
+        '200':
+          description: Successfully returned a list of item events
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ReadingStats'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        
+components:
+  schemas:
+    ReadingStats:
+      required:
+        - num_item_readings
+        - max_item_reading
+        - num_ability_readings
+        - max_ability_reading
+        - num_total_readings
+      properties:
+        num_item_readings:
+          type: integer
+          example: 42
+        max_item_reading:
+          type: integer
+          example: 32
+        num_ability_readings:
+          type: integer
+          example: 46
+        max_ability_reading:
+          type: integer
+          example: 14
+        num_total_readings:
+          type: integer
+          example: 88
+          

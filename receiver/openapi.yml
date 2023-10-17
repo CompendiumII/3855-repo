@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: DOTA2 Usage Tracker
+  description: This API receives usage events from DOTA2.
+paths:
+  /Usage_Count/item-usage:
+    post:
+      operationId: receiver.record_item_usage
+      responses:
+        '200':
+          description: Successfully registered item use
+        '201':
+          description: Item created
+        '400':
+          description: Item does not exist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/itemRecord'
+              
+  /Usage_Count/ability-usage:
+    post:
+      operationId: receiver.record_ability_usage
+      responses:
+        '200':
+          description: Successfully registered ability use
+        '201':
+          description: Ability created
+        '400':
+          description: Ability does not exist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/abilityRecord'
+              
+components:
+  schemas:
+    itemRecord:
+      required:
+        - steam_id
+        - match_id
+        - game_version
+        - region
+        - item_id
+        - item_name
+        - item_type
+        - item_cost
+        - obtain_status
+        - used_in_game
+      properties:
+        steam_id:
+          type: integer
+          example: 76561198833313974
+        match_id:
+          type: integer
+          example: 7328766015
+        game_version:
+          type: string
+          example: 7.29d
+        region:
+          type: string
+          example: OCE
+        item_id:
+          type: integer
+          example: 20
+        item_name:
+          type: string
+          example: 'recipe_urn_of_shadows'
+        item_type:
+          type: string
+          example: 'recipe'
+        item_cost:
+          type: integer
+          example: 2300
+        obtain_status:
+          type: string
+          example: 'neutral_drop'
+        used_in_game:
+          type: integer
+          example: 12
+          
+    abilityRecord:
+      required:
+        - steam_id
+        - match_id
+        - game_version
+        - region
+        - hero_id
+        - hero_name
+        - ability_id
+        - ability_name
+        - ability_level
+        - used_in_game
+      properties:
+        steam_id:
+          type: integer
+          example: 76561198833313974
+        match_id:
+          type: integer
+          example: 7328766015
+        game_version:
+          type: string
+          example: 7.29d
+        region:
+          type: string
+          example: OCE
+        hero_id:
+          type: integer
+          example: 68
+        hero_name:
+          type: string
+          example: 'npc_dota_hero_ancient_apparition'
+        ability_id:
+          type: integer
+          example: 5233
+        ability_name:
+          type: string
+          example: 'dazzle_poison_touch'
+        ability_level:
+          type: integer
+          example: 2
+        used_in_game:
+          type: integer
+          example: 145

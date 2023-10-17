@@ -1,0 +1,9 @@
+version: 1
+datastore:
+  filename: data.json
+scheduler:
+  period_sec: 5
+ability:
+  url: http://localhost:8090/Usage_Count/ability-usage
+item:
+  url: http://localhost:8090/Usage_Count/item-usage

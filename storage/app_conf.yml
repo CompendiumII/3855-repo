@@ -1,0 +1,12 @@
+version: 1
+datastore:
+  user: user
+  password:
+  hostname: kevin-3855.eastus.cloudapp.azure.com
+  port: 3306
+  db: events
+events:
+  hostname: kevin-3855.eastus.cloudapp.azure.com
+  port: 9092
+  topic: events
+  

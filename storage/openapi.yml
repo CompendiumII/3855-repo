@@ -1,0 +1,163 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: DOTA2 Usage Tracker
+  description: This API receives usage events from DOTA2.
+paths:
+  /Usage_Count/item-usage:
+    get:
+      operationId: storage.get_item_usage
+      parameters:
+        - name: timestamp
+          in: query
+          description: Limits the number of items on a page
+          schema:
+            type: string
+            format: date-time
+            example: "2023-10-16 16:22:15.520824"
+      responses:
+        '200':
+          description: Successfully recorded an item usage
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/itemRecord'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              
+  /Usage_Count/ability-usage:
+    get:
+      operationId: storage.get_ability_usage
+      parameters:
+        - name: timestamp
+          in: query
+          description: Limits the number of items on a page
+          schema:
+            type: string
+            format: date-time
+            example: "2023-10-16 16:22:15.520824"
+      responses:
+        '200':
+          description: Successfully recorded an ability usage
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/abilityRecord'
+        '400':
+          description: Invalid request
+          content:
+           application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              
+components:
+  schemas:
+    itemRecord:
+      required:
+        - steam_id
+        - match_id
+        - game_version
+        - region
+        - item_id
+        - item_name
+        - item_type
+        - item_cost
+        - obtain_status
+        - used_in_game
+        - trace_id
+      properties:
+        steam_id:
+          type: integer
+          example: 76561198833313974
+        match_id:
+          type: integer
+          example: 7328766015
+        game_version:
+          type: string
+          example: 7.29d
+        region:
+          type: string
+          example: OCE
+        item_id:
+          type: integer
+          example: 20
+        item_name:
+          type: string
+          example: 'recipe_urn_of_shadows'
+        item_type:
+          type: string
+          example: 'recipe'
+        item_cost:
+          type: integer
+          example: 2300
+        obtain_status:
+          type: string
+          example: 'neutral_drop'
+        used_in_game:
+          type: integer
+          example: 12
+        trace_id:
+          type: string
+          example: '1o31419p-l1a2-00ab-9xg2-20ac203lAkbj01'
+          
+    abilityRecord:
+      required:
+        - steam_id
+        - match_id
+        - game_version
+        - region
+        - hero_id
+        - hero_name
+        - ability_id
+        - ability_name
+        - ability_level
+        - used_in_game
+        - trace_id
+      properties:
+        steam_id:
+          type: integer
+          example: 76561198833313974
+        match_id:
+          type: integer
+          example: 7328766015
+        game_version:
+          type: string
+          example: 7.29d
+        region:
+          type: string
+          example: OCE
+        hero_id:
+          type: integer
+          example: 68
+        hero_name:
+          type: string
+          example: 'npc_dota_hero_ancient_apparition'
+        ability_id:
+          type: integer
+          example: 5233
+        ability_name:
+          type: string
+          example: 'dazzle_poison_touch'
+        ability_level:
+          type: integer
+          example: 2
+        used_in_game:
+          type: integer
+          example: 145
+        trace_id:
+          type: string
+          example: '412lm0sl-bm0s-1234-9xg2-21esl30rto1j1'
